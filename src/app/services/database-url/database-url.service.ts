@@ -8,7 +8,6 @@ const ACTIVE_EMISSION_URL = 'active-emission';
 const ALBUMS_URL = 'albums';
 const ARTISTS_URL = 'artists';
 const EMISSIONS_URL = 'emissions';
-const GENRES_URL = 'genres';
 const MESSAGES_URL = 'messages';
 const SONGS_URL = 'songs';
 
@@ -41,9 +40,7 @@ export class DatabaseUrlService {
   getEmissionsPath() {
     return DATABASE_ROOT_URL + SEPARATOR + EMISSIONS_URL + SEPARATOR;
   }
-  getGenresPath() {
-    return DATABASE_ROOT_URL + SEPARATOR + GENRES_URL + SEPARATOR;
-  }
+
   getMessagesPath() {
     return DATABASE_ROOT_URL + SEPARATOR + MESSAGES_URL + SEPARATOR;
   }

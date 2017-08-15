@@ -67,7 +67,7 @@ export class DatabaseService {
    * @returns {FirebaseListObservable<any[]>}
    */
   getList(path: string, query?: any): FirebaseListObservable<any[]> {
-    return this._angularFire.list(path, query);
+    return this._angularFire.list(path, {query});
   }
 
   /**
