@@ -14,6 +14,7 @@ export class PlayingsongComponent implements OnInit {
   private winnerSong: FirebaseObjectObservable<any>;
   public songs: FirebaseListObservable<any>;
   private keySongPlaying: string;
+  private albumCoverUrl: string;
 
   constructor(private songsService: SongsService,
               private emissionService: EmissionService) {
@@ -22,6 +23,11 @@ export class PlayingsongComponent implements OnInit {
         this.keySongPlaying = snapshot.$key;
       });
       this.songsService.getSong(this.keySongPlaying).subscribe((snapshot) => {
+        const artist: string = snapshot.artist[0];
+        const album: string = snapshot.album;
+        this.songsService.getAlbumCover(artist, album).subscribe((data) => {
+          this.albumCoverUrl = data['album']['image'][2]['#text'];
+        });
         this.winnerSong = snapshot;
       });
     });

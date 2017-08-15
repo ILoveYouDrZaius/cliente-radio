@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
 import { AppComponent } from './app.component';
 import { PlayingsongComponent } from './webcomponents/playingsong/playingsong.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { PlayingsongComponent } from './webcomponents/playingsong/playingsong.co
       storageBucket: 'radiointeractiva-9a96d.appspot.com',
       messagingSenderId: '946787529311'
     }),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
