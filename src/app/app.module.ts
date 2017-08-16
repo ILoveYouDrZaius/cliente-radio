@@ -5,11 +5,13 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AppComponent } from './app.component';
 import { PlayingsongComponent } from './webcomponents/playingsong/playingsong.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NominatedsongsComponent } from './webcomponents/nominatedsongs/nominatedsongs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlayingsongComponent
+    PlayingsongComponent,
+    NominatedsongsComponent
   ],
   imports: [
     BrowserModule,

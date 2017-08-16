@@ -3,6 +3,7 @@ import { DatabaseService } from '../database/database.service';
 import { DatabaseUrlService } from '../database-url/database-url.service';
 import { EmissionService } from '../emission/emission.service';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SongsService {
@@ -12,12 +13,18 @@ export class SongsService {
     private emissionService: EmissionService,
     private http: HttpClient) { }
 
-  getList() {
-    return this.dbService.getList(this.dbUrlService.getSongsPath());
-  }
-
   getSong(key: string) {
     return this.dbService.getObject(this.dbUrlService.getSongsPath(), key);
+  }
+
+  getSongs(listOfKeys) {
+    const nominatedSongs: any[] = [];
+    listOfKeys.forEach(key => {
+      this.dbService.getObject(this.dbUrlService.getSongsPath(), key).subscribe((song) => {
+        nominatedSongs.push(song);
+      });
+    });
+    return nominatedSongs;
   }
 
   // Application name	RadioApp
@@ -29,5 +36,15 @@ export class SongsService {
     artist = artist.replace(' ', '+');
     album = album.replace(' ', '+');
     return this.http.get('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key='+this.last_fm_api_key+'&artist='+artist+'&album='+album+'&format=json');
+  }
+
+  getVotesSong(keyOfSong) {
+    return this.dbService.getObject(this.dbUrlService.getEmissionsPath(), keyOfSong);
+  }
+
+  addVoteSong(keyOfSong) {
+    this.dbService.getObject(this.dbUrlService.getEmissionsPath(), keyOfSong).subscribe((emission) => {
+      console.log(emission.nominated_votes);
+    });
   }
 }

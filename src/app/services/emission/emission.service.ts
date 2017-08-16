@@ -8,6 +8,7 @@ export class EmissionService {
   constructor(private dbService: DatabaseService,
     private dbUrlService: DatabaseUrlService) { }
   private activeSongKey: string;
+
   getActiveEmission() {
     return this.dbService.getList(this.dbUrlService.getActiveEmissionPath(), {
       orderByChild: 'playing',
@@ -15,4 +16,10 @@ export class EmissionService {
     });
   }
 
+  getNominatedEmissions() {
+    return this.dbService.getList(this.dbUrlService.getActiveEmissionPath(), {
+      orderByChild: 'nominated',
+      equalTo: true,
+    });
+  }
 }
