@@ -13,7 +13,7 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
 export class NominatedsongsComponent implements OnInit {
   private nominatedSongs: any[] = [];
   private votesSong: Song[] = [];
-  private canciones = {};
+  private canciones;
 
   constructor(private songsService: SongsService,
     private emissionService: EmissionService) {
@@ -24,6 +24,9 @@ export class NominatedsongsComponent implements OnInit {
       });
       if (nominatedSongsKeys.length === 3) {
         this.canciones = this.songsService.getSongs(nominatedSongsKeys);
+        this.canciones.forEach((song) => {
+          console.log('ok');
+        });
       }
     });
   }

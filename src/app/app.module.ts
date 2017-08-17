@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { PlayingsongComponent } from './webcomponents/playingsong/playingsong.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NominatedsongsComponent } from './webcomponents/nominatedsongs/nominatedsongs.component';
+import { ChatComponent } from './webcomponents/chat/chat.component';
+import { MessageComponent } from './webcomponents/chat/message/message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayingsongComponent,
-    NominatedsongsComponent
+    NominatedsongsComponent,
+    ChatComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

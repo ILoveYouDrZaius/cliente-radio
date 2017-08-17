@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Song } from '../../interfaces/song';
 import { DatabaseService } from '../database/database.service';
 import { DatabaseUrlService } from '../database-url/database-url.service';
 import { EmissionService } from '../emission/emission.service';
@@ -18,10 +19,12 @@ export class SongsService {
   }
 
   getSongs(listOfKeys) {
-    const nominatedSongs: any[] = [];
-    listOfKeys.forEach(key => {
-      this.dbService.getObject(this.dbUrlService.getSongsPath(), key).subscribe((song) => {
-        nominatedSongs.push(song);
+    const nominatedSongs: Song[] = [];
+    this.dbService.getList(this.dbUrlService.getSongsPath()).subscribe((snapshot) => {
+      snapshot.forEach((song) => {
+        if(listOfKeys.indexOf(song.$key) > -1){
+          nominatedSongs.push(song);          
+        }
       });
     });
     return nominatedSongs;
