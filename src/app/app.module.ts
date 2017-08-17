@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NominatedsongsComponent } from './webcomponents/nominatedsongs/nominatedsongs.component';
 import { ChatComponent } from './webcomponents/chat/chat.component';
 import { MessageComponent } from './webcomponents/chat/message/message.component';
+import { AudioplayerComponent } from './webcomponents/audioplayer/audioplayer.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MessageComponent } from './webcomponents/chat/message/message.component
     PlayingsongComponent,
     NominatedsongsComponent,
     ChatComponent,
-    MessageComponent
+    MessageComponent,
+    AudioplayerComponent
   ],
   imports: [
     BrowserModule,
