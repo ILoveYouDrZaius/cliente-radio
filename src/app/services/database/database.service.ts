@@ -78,7 +78,7 @@ export class DatabaseService {
    * @returns {firebase.Promise<void>}
    */
   update(path: string, key: string, data: any): firebase.Promise<void> {
-    return this._angularFire.object(path + key).set(data);
+    return this._angularFire.object(path + key).update(data);
   }
 
   /**

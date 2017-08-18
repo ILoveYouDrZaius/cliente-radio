@@ -24,17 +24,26 @@ export class NominatedsongsComponent implements OnInit {
       snapshots.forEach((snapshot) => {
         const tempSongNominated: NominatedSong = {votes: 0, title: ''};
         songsService.getSong(snapshot.$key).subscribe((song) => {
+          let repeatedSong = false;
           tempSongNominated.$key = song.$key;
           tempSongNominated.title = song.title;
           tempSongNominated.votes = snapshot.nominated_votes;
-          this.nominatedSongs.push(tempSongNominated);
+          
+          this.nominatedSongs.forEach((song) => {
+            if (song.title === tempSongNominated.title) {
+              repeatedSong = true;
+            }
+          });
+          if (!repeatedSong) {
+            this.nominatedSongs.push(tempSongNominated);
+          }
         });
       });
     });
   }
 
   voteSong(key) {
-    console.log('voto a ', key);
+    this.songsService.voteSong(key);
     return this.songsService.getVotesSong(key);
   }
 

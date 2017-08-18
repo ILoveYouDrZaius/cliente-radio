@@ -5,10 +5,14 @@ import { DatabaseUrlService } from '../database-url/database-url.service';
 import { EmissionService } from '../emission/emission.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Rx';
+import 'rxjs/add/operator/take'
+
 
 @Injectable()
 export class SongsService {
   private last_fm_api_key = 'c2e1ac3c2c54e9ca6b1f629b39390e0c';
+  private songSubscription: Subscription;
   constructor(private dbService: DatabaseService,
     private dbUrlService: DatabaseUrlService,
     private emissionService: EmissionService,
@@ -41,13 +45,18 @@ export class SongsService {
     return this.http.get('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key='+this.last_fm_api_key+'&artist='+artist+'&album='+album+'&format=json');
   }
 
-  getVotesSong(keyOfSong) {
+  getVotesSong(keyOfSong: string) {
     return this.dbService.getObject(this.dbUrlService.getEmissionsPath(), keyOfSong);
   }
 
-  addVoteSong(keyOfSong) {
-    this.dbService.getObject(this.dbUrlService.getEmissionsPath(), keyOfSong).subscribe((emission) => {
-      console.log(emission.nominated_votes);
+  voteSong(keyOfSong: string){
+    this.songSubscription = this.dbService.getObject(this.dbUrlService.getActiveEmissionPath(), keyOfSong).take(1).subscribe((activeEmission) => {
+      const nominated_votes = activeEmission.nominated_votes + 1;
+      this.dbService.update(this.dbUrlService.getActiveEmissionPath(), keyOfSong, { nominated_votes: nominated_votes});
     });
+  }
+
+  ngOnDestroy() {
+    this.songSubscription.unsubscribe();
   }
 }
