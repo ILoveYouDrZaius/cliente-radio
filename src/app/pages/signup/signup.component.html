@@ -1,0 +1,25 @@
+<div>
+  <form (submit)="signup()">
+    <div>
+      <label>email</label><br>
+      <input type="email" id="email" name="email" [(ngModel)]="email">
+    </div>
+
+    <div>
+      <label>password</label><br>
+      <input type="password" id="password" name="password" [(ngModel)]="password">
+    </div>
+
+    <div>
+      <label>re-password</label><br>
+      <input type="password" id="repassword" name="repassword" [(ngModel)]="repassword">
+    </div>
+
+    <div>
+      <label>Key</label><br>
+      <input type="text" id="key" name="key" [(ngModel)]="key">
+    </div>
+
+    <button type="submit">Registrar</button>
+  </form>
+</div>

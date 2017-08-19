@@ -6,17 +6,18 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { routes } from './app.routes';
 import { RouterModule, Routes } from '@angular/router';
-import { RadioModule } from './pages/radio/radio.module';
+// import { RadioComponent } from './pages/radio/radio.component';
+// import { LoginComponent } from './pages/login/login.component';
 // import { NominatedsongsComponent } from './webcomponents/nominatedsongs/nominatedsongs.component';
 // import { PlayingsongComponent } from './webcomponents/playingsong/playingsong.component';
 // import { ChatComponent } from './webcomponents/chat/chat.component';
 // import { MessageComponent } from './webcomponents/chat/message/message.component';
 // import { AudioplayerComponent } from './webcomponents/audioplayer/audioplayer.component';
 // import { NavbarComponent } from './webcomponents/navbar/navbar.component';
-// import { RadioComponent } from './pages/radio/radio.component';
-// import { LoginComponent } from './pages/login/login.component';
-// import { NavbarComponent } from './webcomponents/navbar/navbar.component';
-
+import { RadioModule } from './pages/radio/radio.module';
+import { NavbarModule } from './shared_components/navbar/navbar.module';
+import { LoginModule } from './pages/login/login.module';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,10 @@ import { RadioModule } from './pages/radio/radio.module';
     RouterModule.forRoot(routes),
     AngularFireDatabaseModule,
     HttpClientModule,
-    RadioModule
+    RadioModule,
+    NavbarModule,
+    LoginModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

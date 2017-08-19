@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Message } from '../../../interfaces/message';
-import { UsersService } from '../../../services/users/users.service';
+import { Message } from '../../../../interfaces/message';
+import { UsersService } from '../../../../services/users/users.service';
 
 @Component({
   selector: 'app-message',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SongsService } from '../../services/songs/songs.service';
-import { EmissionService } from '../../services/emission/emission.service';
-import { Song } from '../../interfaces/song';
-import { NominatedSong } from '../../interfaces/nominated-song';
+import { SongsService } from '../../../services/songs/songs.service';
+import { EmissionService } from '../../../services/emission/emission.service';
+import { Song } from '../../../interfaces/song';
+import { NominatedSong } from '../../../interfaces/nominated-song';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
@@ -22,7 +22,7 @@ export class NominatedsongsComponent implements OnInit {
     this.emissionService.getNominatedEmissions().subscribe((snapshots) => {
       this.nominatedSongs = [];
       snapshots.forEach((snapshot) => {
-        const tempSongNominated: NominatedSong = {votes: 0, title: ''};
+        const tempSongNominated: NominatedSong = {votes: 0, title: '', artist: '', album: ''};
         songsService.getSong(snapshot.$key).subscribe((song) => {
           let repeatedSong = false;
           tempSongNominated.$key = song.$key;

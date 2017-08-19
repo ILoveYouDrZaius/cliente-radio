@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { SongsService } from '../../services/songs/songs.service';
-import { EmissionService } from '../../services/emission/emission.service';
-import { Song } from '../../interfaces/song';
+import { SongsService } from '../../../services/songs/songs.service';
+import { EmissionService } from '../../../services/emission/emission.service';
+import { Song } from '../../../interfaces/song';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({

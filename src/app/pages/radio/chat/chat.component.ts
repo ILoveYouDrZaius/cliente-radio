@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DatabaseService } from '../../services/database/database.service';
-import { DatabaseUrlService } from '../../services/database-url/database-url.service';
+import { DatabaseService } from '../../../services/database/database.service';
+import { DatabaseUrlService } from '../../../services/database-url/database-url.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { MessagesService } from '../../services/messages/messages.service';
-import { UsersService } from '../../services/users/users.service';
-import { Message } from '../../interfaces/message';
+import { MessagesService } from '../../../services/messages/messages.service';
+import { UsersService } from '../../../services/users/users.service';
+import { Message } from '../../../interfaces/message';
 
 @Component({
   selector: 'app-chat',

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login.component';
+import { ManualComponent } from './manual/manual.component';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent }
+  { path: '', pathMatch: 'full', redirectTo: 'manual' },
+  { path: 'manual', component: ManualComponent, data: { title: 'Accede con tu usuario y contraseña' } }
 ];

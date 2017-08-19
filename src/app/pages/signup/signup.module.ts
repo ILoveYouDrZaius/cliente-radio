@@ -1,20 +1,17 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SignupComponent } from './signup.component';
 import { RouterModule } from '@angular/router';
-import { routes } from './login.routes';
-import { ManualComponent } from './manual/manual.component';
-import { SocialComponent } from './social/social.component';
+import { routes } from './signup.routes';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    ManualComponent,
-    SocialComponent
-  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule
-  ]
+  ],
+  declarations: [SignupComponent]
 })
-export class LoginModule { }
+export class SignupModule { }
