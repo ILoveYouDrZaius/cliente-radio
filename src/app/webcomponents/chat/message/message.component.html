@@ -1,1 +1,12 @@
-<label> {{ username }} ({{ message.timestamp }}) - {{ message.message }}</label>
+<!-- <label> {{ username }} ({{ message.timestamp }}) - {{ message.message }}</label> -->
+<div class="row">
+<div class="col-sm-2">
+    {{username}}
+</div>
+<div class="col-sm-2">
+    {{message.timestamp}}
+</div>
+<div class="col-sm-8">
+    {{message.message}}
+</div>
+</div>

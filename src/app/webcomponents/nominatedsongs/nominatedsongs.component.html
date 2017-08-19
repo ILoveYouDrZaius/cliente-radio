@@ -1,3 +1,10 @@
-<div *ngFor="let nominatedSong of nominatedSongs">
-  <a href="#null" (click)="voteSong(nominatedSong.$key)">{{ nominatedSong.title }} {{ nominatedSong.votes }}</a>
+<div class="webcomponent">
+  <h3>Vota por tu canción</h3>
+  <div class="row justify-content-md-center">
+    <div class="col-sm-6">
+      <div *ngFor="let nominatedSong of nominatedSongs">
+        <button type="button" class="btn btn-info btn-lg btn-block" (click)="voteSong(nominatedSong.$key)">{{ nominatedSong.title }} {{ nominatedSong.votes }}</button>
+      </div>
+    </div>
+  </div>
 </div>

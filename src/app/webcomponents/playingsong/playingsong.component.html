@@ -1,7 +1,18 @@
-<div>
-  <h1>Canción actual</h1>
-  {{ winnerSong?.title }}
-  <img src="{{ albumCoverUrl }}" style="width:120px;height:120px;">
-  
-  
+<div class="webcomponent">
+  <div class="row">
+    <div class="col">
+      <h3>Sonando ahora mismo...</h3>
+    </div>
+  </div>
+  <div class ="row">
+    <div class="col-6 mx-auto">
+      <div class="media">
+        <img class="card-img-top" src="{{ albumCoverUrl }}" style="width:120px;height:120px;">
+        <div class="media-body">
+          <h5>{{ winnerSong?.artist }} - {{ winnerSong?.title }}</h5>
+          <h5><small>{{ winnerSong?.album }}</small></h5>   
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

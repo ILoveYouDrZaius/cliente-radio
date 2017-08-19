@@ -28,9 +28,9 @@ export class NominatedsongsComponent implements OnInit {
           tempSongNominated.$key = song.$key;
           tempSongNominated.title = song.title;
           tempSongNominated.votes = snapshot.nominated_votes;
-          
-          this.nominatedSongs.forEach((song) => {
-            if (song.title === tempSongNominated.title) {
+
+          this.nominatedSongs.forEach((_song) => {
+            if (_song.title === tempSongNominated.title) {
               repeatedSong = true;
             }
           });

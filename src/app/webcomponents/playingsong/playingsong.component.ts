@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SongsService } from '../../services/songs/songs.service';
 import { EmissionService } from '../../services/emission/emission.service';
 import { Song } from '../../interfaces/song';
@@ -25,7 +25,7 @@ export class PlayingsongComponent implements OnInit {
       this.songsService.getSong(this.keySongPlaying).subscribe((snapshot) => {
         const artist: string = snapshot.artist[0];
         const album: string = snapshot.album;
-        this.songsService.getAlbumCover(artist, album).subscribe((data) => {
+        this.songsService.getAlbumInfo(artist, album).subscribe((data) => {
           this.albumCoverUrl = data['album']['image'][2]['#text'];
         });
         this.winnerSong = snapshot;

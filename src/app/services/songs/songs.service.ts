@@ -6,7 +6,7 @@ import { EmissionService } from '../emission/emission.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Rx';
-import 'rxjs/add/operator/take'
+import 'rxjs/add/operator/take';
 
 
 @Injectable()
@@ -26,8 +26,8 @@ export class SongsService {
     const nominatedSongs: Song[] = [];
     this.dbService.getList(this.dbUrlService.getSongsPath()).subscribe((snapshot) => {
       snapshot.forEach((song) => {
-        if(listOfKeys.indexOf(song.$key) > -1){
-          nominatedSongs.push(song);          
+        if (listOfKeys.indexOf(song.$key) > -1) {
+          nominatedSongs.push(song);
         }
       });
     });
@@ -39,10 +39,10 @@ export class SongsService {
   // Shared secret	8652163bfae49ae653c7ff9aea65ecd4
   // Registered to	Gandaldorf
   // http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=c2e1ac3c2c54e9ca6b1f629b39390e0c&artist=at+the+gates&album=slaughter+of+the+soul&format=json
-  getAlbumCover(artist: string, album: string) {
+  getAlbumInfo(artist: string, album: string) {
     artist = artist.replace(' ', '+');
     album = album.replace(' ', '+');
-    return this.http.get('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key='+this.last_fm_api_key+'&artist='+artist+'&album='+album+'&format=json');
+    return this.http.get('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key='+this.last_fm_api_key+'&artist='+artist+'&album='+album+'&lang=spa&format=json');
   }
 
   getVotesSong(keyOfSong: string) {
