@@ -5,22 +5,26 @@ import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/d
 import { MessagesService } from '../../../services/messages/messages.service';
 import { UsersService } from '../../../services/users/users.service';
 import { Message } from '../../../interfaces/message';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
-  providers: [ MessagesService, UsersService ]
+  providers: [ MessagesService, UsersService, AuthService ]
 })
 export class ChatComponent implements OnInit {
   private _loginStatus: boolean;
-  public messages: FirebaseListObservable<any>;
-  public connectedUsers: FirebaseListObservable<any>;
+  private messages: FirebaseListObservable<any>;
+  private connectedUsers: FirebaseListObservable<any>;
+  private _stringToSend: string;
+  private userKey: string;
 
-  constructor(private db: DatabaseService,
-    private dbUrl: DatabaseUrlService,
-    private messagesService: MessagesService,
-    private usersService: UsersService) {
+  constructor(private auth: AuthService,
+              private db: DatabaseService,
+              private dbUrl: DatabaseUrlService,
+              private messagesService: MessagesService,
+              private usersService: UsersService) {
 
   }
 
@@ -35,5 +39,25 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+    this.auth.getCurrentAuthState().subscribe(data => {
+      this._loginStatus = this.auth.isAuthenticated();
+      if (this._loginStatus) {
+        this.userKey = this.auth.getCurrentUserId();
+      }
+    });
+  }
+
+  sendMessage(event) {
+    console.log(this.stringToSend);
+    event.preventDefault();
+    this.messagesService.sendMessage(this.stringToSend, this.userKey);
+  }
+
+  get stringToSend(): string {
+    return this._stringToSend;
+  }
+
+  set stringToSend(value: string) {
+    this._stringToSend = value;
   }
 }

@@ -1,22 +1,26 @@
 <app-navbar-login></app-navbar-login>
-
-<div class="webcontainer">
+<div class="container webcomponent">
   <form (submit)="signup()">
     <div>
-      <label>email</label><br>
+      <label>Nombre de usuario</label><br>
+      <input type="text" id="username" name="username" [(ngModel)]="username">
+    </div>
+    <div>
+      <label>Correo electrónico</label><br>
       <input type="email" id="email" name="email" [(ngModel)]="email">
     </div>
-
     <div>
-      <label>password</label><br>
+      <label>Confirmación correo electrónico</label><br>
+      <input type="email" id="email" name="email" [(ngModel)]="email">
+    </div>
+    <div>
+      <label>Password</label><br>
       <input type="password" id="password" name="password" [(ngModel)]="password">
     </div>
-
     <div>
-      <label>re-password</label><br>
+      <label>Confirmación Password</label><br>
       <input type="password" id="repassword" name="repassword" [(ngModel)]="repassword">
     </div>
-
     <button type="submit">Registrar</button>
   </form>
 </div>

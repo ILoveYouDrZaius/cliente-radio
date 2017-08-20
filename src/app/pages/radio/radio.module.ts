@@ -9,12 +9,15 @@ import { ChatComponent } from '../../pages/radio/chat/chat.component';
 import { MessageComponent } from '../../pages/radio/chat/message/message.component';
 import { AudioplayerComponent } from '../../pages/radio/audioplayer/audioplayer.component';
 import { NavbarModule } from '../../shared_components/navbar/navbar.module';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    NavbarModule
+    NavbarModule,
+    FormsModule
   ],
   declarations: [
     RadioComponent,

@@ -17,20 +17,6 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    // this.auth.getCurrentAuthState().subscribe(user => {
-    //   if (user) {
-    //     if (user.emailVerified) {
-    //       console.log('Estás logueado y validado: ' + user.email);
-    //       this.loginStatus = true;
-    //     } else {
-    //       console.log('Estás logueado pero no puedes continuar hasta que verifiques tu email.')
-    //       this.loginStatus = false;
-    //     }
-    //   } else {
-    //     console.log('No estás logueado');
-    //     this.loginStatus = false;
-    //   }
-    // });
     return (this.getCurrentUser() && this.getCurrentUser().emailVerified) ? true : false;
   }
 
@@ -46,13 +32,12 @@ export class AuthService {
     return this.userState;
   }
 
-  signupWithEmail(email: string, password: string, repassword: string) {
+  signupWithEmail(email: string, password: string, repassword: string, username: string) {
     if (password === repassword) {
-      console.log('Coinciden las passwords');
       this.afAuth.auth.createUserWithEmailAndPassword(email, password)
         .then(data => {
           console.log('Registro correcto'); // TODO: sustituir por un sistema de log
-          this.generateUserData(data);
+          this.generateUserData(data, username);
           data.sendEmailVerification()
             .then(() => {
               console.log('Email de verificación enviado'); // TODO: sustituir por un sistema de log
@@ -97,14 +82,7 @@ export class AuthService {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()
       .addScope('https://www.googleapis.com/auth/plus.login'))
       .then(data => {
-        console.log('Logout correcto');
-        console.log(data);
-        // TODO: vocar a Firebase los datos del usuario
-        // user.name = data.user.displayName;
-        // user.email = data.user.email;
-        // user.avatar = data.user.photoURL;
-        // user.login_type = data.credential.providerId;
-        this.generateUserData(data);
+        this.generateUserData(data, data.additionalUserInfo.profile.name);
       })
       .catch(err => {
         console.log(err);
@@ -116,7 +94,6 @@ export class AuthService {
       .addScope('public_profile'))
       .then(data => {
         console.log(data);
-        // TODO: vocar a Firebase los datos del usuario
         this.generateUserData(data);
       })
       .catch(err => {
@@ -128,7 +105,6 @@ export class AuthService {
     this.afAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider())
       .then(data => {
         console.log(data);
-        // TODO: vocar a Firebase los datos del usuario
         this.generateUserData(data);
       })
       .catch(err => {
@@ -136,24 +112,28 @@ export class AuthService {
       });
   }
 
-  generateUserData(data: any) {
+  generateUserData(data: any, username?: string) {
     const user: User = {};
     let userId = '';
     if (data.user) {
       userId = data.user.uid;
       user.name = data.user.name;
+      if (!data.user.name) {
+        user.name = username;
+      }
+      user.username = username;
       user.email = data.user.email;
       user.login_type = data.credential.providerId;
       // user.avatar = data.user.photoURL;
     } else {
       userId = data.uid;
       user.email = data.email;
+      user.username = username;
       user.login_type = data.providerData[0].providerId;
       //user.phone = string, TODO
       //user.role = number TODO
       //user.birth_date = number, TODO
     }
-
     this.dataService.createWithKey(this.dataUrl.getUsersPath(), userId, user)
       .then(value => {
         console.log(value);

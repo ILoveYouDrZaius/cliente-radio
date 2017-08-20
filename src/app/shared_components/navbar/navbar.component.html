@@ -13,9 +13,12 @@
       <li class="nav-item" *ngIf="!_loginStatus">
         <a class="nav-item nav-link" href="/login">Login / Registro</a>
       </li>
-      <li class="nav-item" *ngIf="_loginStatus">
-          <a class="nav-item nav-link" href="/" (click)="logout()">Salir</a>
-        </li>
+      <span class="navbar-text" *ngIf="_loginStatus">
+        <p class="nav-item">Hola, {{ username }}. ¿Quieres <a href="/" style="color:white;" (click)="logout()">Salir</a>?</p>
+      </span>
+      <!-- <span class="navbar-text">
+        Navbar text with an inline element
+      </span> -->
     </ul>
   </div>
 </nav>

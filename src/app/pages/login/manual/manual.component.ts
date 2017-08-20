@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-manual',
   templateUrl: './manual.component.html',
   styleUrls: ['./manual.component.css'],
-  providers: [AuthService]
+  providers: [ AuthService ]
 })
 export class ManualComponent implements OnInit {
 
@@ -15,20 +15,22 @@ export class ManualComponent implements OnInit {
   private _title: string;
   private _loginStatus: boolean;
 
-  constructor(private auth: AuthService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private auth: AuthService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
-    this.route
-      .queryParamMap.subscribe(params => {
-        this.title = params.get('title') || 'Accede con tu email y contraseña' // TODO: no lo recoge del parámetro
-      });
-
     this.auth.getCurrentAuthState().subscribe(data => {
       this._loginStatus = this.auth.isAuthenticated();
       if (this._loginStatus) {
         this.router.navigateByUrl('/');
       }
     });
+
+    this.route
+      .queryParamMap.subscribe(params => {
+        this.title = params.get('title') || 'Accede con tu email y contraseña'; // TODO: no lo recoge del parámetro
+      });
 
     this.email = '';
     this.password = '';

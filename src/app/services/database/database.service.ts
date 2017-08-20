@@ -98,6 +98,6 @@ export class DatabaseService {
   }
 
   timestamp() {
-    return firebase.database.ServerValue.TIMESTAMP;
+    return firebase.database.ServerValue.TIMESTAMP.toString();
   }
 }
