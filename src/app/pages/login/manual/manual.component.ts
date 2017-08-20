@@ -37,9 +37,9 @@ export class ManualComponent implements OnInit {
   login() {
     this.auth.loginWithEmail(this.email, this.password);
     this.auth.getCurrentAuthState().subscribe(data => {
-      this.auth.isAuthenticated();
-      if (!this.auth.isAuthenticated()) {
-        this.router.navigateByUrl('songs');
+      this._loginStatus = this.auth.isAuthenticated();
+      if (this._loginStatus) {
+        this.router.navigateByUrl('/');
       }
     });
   }
