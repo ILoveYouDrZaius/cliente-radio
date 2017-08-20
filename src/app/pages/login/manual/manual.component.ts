@@ -13,6 +13,7 @@ export class ManualComponent implements OnInit {
   private _email: string;
   private _password: string;
   private _title: string;
+  private _loginStatus: boolean;
 
   constructor(private auth: AuthService, private route: ActivatedRoute, private router: Router) { }
 
@@ -21,6 +22,13 @@ export class ManualComponent implements OnInit {
       .queryParamMap.subscribe(params => {
         this.title = params.get('title') || 'Accede con tu email y contraseña' // TODO: no lo recoge del parámetro
       });
+
+    this.auth.getCurrentAuthState().subscribe(data => {
+      this._loginStatus = this.auth.isAuthenticated();
+      if (this._loginStatus) {
+        this.router.navigateByUrl('/');
+      }
+    });
 
     this.email = '';
     this.password = '';
