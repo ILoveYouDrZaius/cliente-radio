@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
-    this.authService.signupWithEmail(this.email, this.password, this.repassword, this.key);
+    this.authService.signupWithEmail(this.email, this.password, this.repassword);
   }
 
 

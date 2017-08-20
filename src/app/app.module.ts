@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { routes } from './app.routes';
 import { RouterModule, Routes } from '@angular/router';
-// import { RadioComponent } from './pages/radio/radio.component';
 // import { LoginComponent } from './pages/login/login.component';
 // import { NominatedsongsComponent } from './webcomponents/nominatedsongs/nominatedsongs.component';
 // import { PlayingsongComponent } from './webcomponents/playingsong/playingsong.component';
@@ -16,19 +15,21 @@ import { RouterModule, Routes } from '@angular/router';
 // import { NavbarComponent } from './webcomponents/navbar/navbar.component';
 import { RadioModule } from './pages/radio/radio.module';
 import { NavbarModule } from './shared_components/navbar/navbar.module';
+import { NavbarLoginModule } from './shared_components/navbar-login/navbar-login.module';
 import { LoginModule } from './pages/login/login.module';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+// import { NavbarLoginComponent } from './shared_components/navbar-login/navbar-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    // NavbarLoginComponent,
     // PlayingsongComponent,
     // NominatedsongsComponent,
     // ChatComponent,
     // MessageComponent,
     // AudioplayerComponent,
     // NavbarComponent,
-    // RadioComponent,
     // LoginComponent
   ],
   imports: [
@@ -46,6 +47,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     HttpClientModule,
     RadioModule,
     NavbarModule,
+    NavbarLoginModule,
     LoginModule,
     AngularFireAuthModule
   ],

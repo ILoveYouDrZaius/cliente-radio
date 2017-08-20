@@ -5,16 +5,20 @@ import { routes } from './login.routes';
 import { ManualComponent } from './manual/manual.component';
 import { SocialComponent } from './social/social.component';
 import { FormsModule } from '@angular/forms';
+import { NavbarLoginModule } from '../../shared_components/navbar-login/navbar-login.module';
+import { LoginComponent } from './login.component';
 
 @NgModule({
-  declarations: [
-    ManualComponent,
-    SocialComponent
-  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FormsModule
+    FormsModule,
+    NavbarLoginModule
+  ],
+  declarations: [
+    ManualComponent,
+    SocialComponent,
+    LoginComponent
   ]
 })
 export class LoginModule { }

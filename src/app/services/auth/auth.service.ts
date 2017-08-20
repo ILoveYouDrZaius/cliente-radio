@@ -46,7 +46,7 @@ export class AuthService {
     return this.userState;
   }
 
-  signupWithEmail(email: string, password: string, repassword: string, key: string) {
+  signupWithEmail(email: string, password: string, repassword: string) {
     if (password === repassword) {
       console.log('Coinciden las passwords');
       this.afAuth.auth.createUserWithEmailAndPassword(email, password)
@@ -154,7 +154,7 @@ export class AuthService {
       //user.birth_date = number, TODO
     }
 
-    this.dataService.createWithKey(this.dataUrl.getAdminUsersPath(), userId, user)
+    this.dataService.createWithKey(this.dataUrl.getUsersPath(), userId, user)
       .then(value => {
         console.log(value);
       })
