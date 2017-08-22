@@ -19,6 +19,8 @@ import { NavbarLoginModule } from './shared_components/navbar-login/navbar-login
 import { LoginModule } from './pages/login/login.module';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 // import { NavbarLoginComponent } from './shared_components/navbar-login/navbar-login.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     // LoginComponent
   ],
   imports: [
+    NgbModule.forRoot(),
     BrowserModule,
     AngularFireModule.initializeApp({
       apiKey: 'AIzaSyAasuPpwOGW5rpIAB69Ng0YtcKYEXkQVFY',

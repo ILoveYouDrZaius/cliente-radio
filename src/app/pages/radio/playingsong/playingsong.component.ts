@@ -3,6 +3,7 @@ import { SongsService } from '../../../services/songs/songs.service';
 import { EmissionService } from '../../../services/emission/emission.service';
 import { Song } from '../../../interfaces/song';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-playingsong',
@@ -15,9 +16,11 @@ export class PlayingsongComponent implements OnInit {
   public songs: FirebaseListObservable<any>;
   private keySongPlaying: string;
   private albumCoverUrl: string;
+  closeResult: string;
 
   constructor(private songsService: SongsService,
-              private emissionService: EmissionService) {
+              private emissionService: EmissionService,
+              private modalService: NgbModal) {
     this.emissionService.getActiveEmission().subscribe((snapshots) => {
       snapshots.forEach((snapshot) => {
         this.keySongPlaying = snapshot.$key;
@@ -31,6 +34,24 @@ export class PlayingsongComponent implements OnInit {
         this.winnerSong = snapshot;
       });
     });
+  }
+
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 
   ngOnInit() {

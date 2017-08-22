@@ -10,6 +10,7 @@ import { MessageComponent } from '../../pages/radio/chat/message/message.compone
 import { AudioplayerComponent } from '../../pages/radio/audioplayer/audioplayer.component';
 import { NavbarModule } from '../../shared_components/navbar/navbar.module';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     RouterModule.forChild(routes),
     NavbarModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   declarations: [
     RadioComponent,
