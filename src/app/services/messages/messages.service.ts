@@ -32,11 +32,9 @@ export class MessagesService {
   }
 
   sendMessage(message: string, userKey: string) {
-    console.log('Me llega esto: ', userKey, message);
-    const msg: Message = {message: '', timestamp: 0, user: ''};
+    const msg: Message = { message: '', timestamp: this.dbService.timestamp(), user: ''};
     msg.message = message;
     msg.user = userKey;
-    console.log('Mensaje enviado: ', msg);
     this.dbService.create(this.dbUrlService.getMessagesPath(), msg).subscribe((data) => {
       console.log('data, ', data);
     });

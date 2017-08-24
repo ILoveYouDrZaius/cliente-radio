@@ -1,6 +1,6 @@
 export interface Message {
     $key?: string,
-    timestamp: number,
+    timestamp: object,
     user: string,
     message: string
 }
