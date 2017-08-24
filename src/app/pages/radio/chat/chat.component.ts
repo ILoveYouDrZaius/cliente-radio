@@ -6,6 +6,7 @@ import { MessagesService } from '../../../services/messages/messages.service';
 import { UsersService } from '../../../services/users/users.service';
 import { Message } from '../../../interfaces/message';
 import { AuthService } from '../../../services/auth/auth.service';
+import { AfterViewChecked } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
@@ -13,7 +14,7 @@ import { AuthService } from '../../../services/auth/auth.service';
   styleUrls: ['./chat.component.css'],
   providers: [ MessagesService, UsersService, AuthService ]
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
   private _loginStatus: boolean;
   private messages: FirebaseListObservable<any>;
   private connectedUsers: FirebaseListObservable<any>;
@@ -32,6 +33,21 @@ export class ChatComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+    this.auth.getCurrentAuthState().subscribe(data => {
+      this._loginStatus = this.auth.isAuthenticated();
+      if (this._loginStatus) {1
+        this.userKey = this.auth.getCurrentUserId();
+      }
+    });
+  }
+
+  ngAfterViewChecked() {
+    var element = document.getElementById("chatwindow");
+    element.scrollTop = element.scrollHeight;
+  }
+
+
   getList() {
     this.messages = this.messagesService.getList();
     this.connectedUsers = this.usersService.getUsersConnectedList();
@@ -41,18 +57,10 @@ export class ChatComponent implements OnInit {
     this.messagesService.removeMessage(messageKey);
   }
 
-  ngOnInit() {
-    this.auth.getCurrentAuthState().subscribe(data => {
-      this._loginStatus = this.auth.isAuthenticated();
-      if (this._loginStatus) {
-        this.userKey = this.auth.getCurrentUserId();
-      }
-    });
-  }
-
   sendMessage(event) {
     event.preventDefault();
     this.messagesService.sendMessage(this.stringToSend, this.userKey);
+    (<HTMLInputElement>document.getElementById("stringToSend")).value = '';
   }
 
   get stringToSend(): string {
