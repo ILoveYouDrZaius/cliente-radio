@@ -14,7 +14,7 @@ export class MessageComponent implements OnInit {
   private msgTime: String;
   private msgDate: String;
 
-  constructor(private userService: UsersService) { }
+  constructor(private userService: UsersService) {}
 
   ngOnInit() {
     this.userService.getUserName(this.message.user).subscribe((data) => {
@@ -23,5 +23,6 @@ export class MessageComponent implements OnInit {
     const dateTimeMsg = new Date(+(this.message.timestamp));
     this.msgDate = dateTimeMsg.getUTCDate().toString() + '/' + (dateTimeMsg.getUTCMonth()+1).toString() + '/' + dateTimeMsg.getUTCFullYear().toString();
     this.msgTime = (dateTimeMsg.getUTCHours() - (dateTimeMsg.getTimezoneOffset() / 60)).toString() + ':' + dateTimeMsg.getUTCMinutes().toString() + ':' + dateTimeMsg.getUTCSeconds().toString();
+    
   }
 }

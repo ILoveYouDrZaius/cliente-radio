@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { DatabaseService } from '../../../services/database/database.service';
 import { DatabaseUrlService } from '../../../services/database-url/database-url.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -25,7 +25,11 @@ export class ChatComponent implements OnInit {
               private dbUrl: DatabaseUrlService,
               private messagesService: MessagesService,
               private usersService: UsersService) {
-
+    this.getList();
+    this.messages.subscribe((cambio) => {
+      var element = document.getElementById("chatwindow");
+      element.scrollTop = element.scrollHeight;
+    });
   }
 
   getList() {
@@ -38,7 +42,6 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getList();
     this.auth.getCurrentAuthState().subscribe(data => {
       this._loginStatus = this.auth.isAuthenticated();
       if (this._loginStatus) {
@@ -48,7 +51,6 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(event) {
-    console.log(this.stringToSend);
     event.preventDefault();
     this.messagesService.sendMessage(this.stringToSend, this.userKey);
   }

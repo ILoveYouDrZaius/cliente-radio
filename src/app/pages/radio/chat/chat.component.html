@@ -1,10 +1,10 @@
 <div class="webcomponent">    
-  <div style="overflow-y:scroll; overflow-x: hidden; height:200px; text-align: justify; padding-top:25px;">
+  <div id="chatwindow" style="overflow-y:scroll; overflow-x: hidden; height:200px; text-align: justify; padding-top:25px;">
     <div *ngFor="let message of messages | async">
       <app-message [message]="message"></app-message>
     </div>
   </div>
-  <form (submit)="sendMessage($event)" >
+  <form (submit)="sendMessage($event)" class="chat">
     <input type="text" class="form-control" placeholder="Escribe tu mensaje" id="stringToSend" name="stringToSend" [(ngModel)]="stringToSend"/>   
     <button type="submit" style="display:none">hidden submit</button>
   </form>
