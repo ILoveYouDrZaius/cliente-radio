@@ -21,8 +21,8 @@ export class MessageComponent implements OnInit {
       this.username = data;
     });
     const dateTimeMsg = new Date(+(this.message.timestamp));
-    this.msgDate = dateTimeMsg.getUTCDate().toString() + '/' + (dateTimeMsg.getUTCMonth()+1).toString() + '/' + dateTimeMsg.getUTCFullYear().toString();
-    this.msgTime = (dateTimeMsg.getUTCHours() - (dateTimeMsg.getTimezoneOffset() / 60)).toString() + ':' + dateTimeMsg.getUTCMinutes().toString() + ':' + dateTimeMsg.getUTCSeconds().toString();
+    this.msgDate = (("0" + dateTimeMsg.getUTCDate()).slice(-2).toString()) + '/' + (("0" + (dateTimeMsg.getUTCMonth() + 1)).slice(-2)).toString() + '/' + ("0" + dateTimeMsg.getUTCFullYear()).slice(-2).toString();
+    this.msgTime = (("0" + (dateTimeMsg.getUTCHours() - (dateTimeMsg.getTimezoneOffset() / 60))).slice(-2)).toString() + ':' + ("0" + (dateTimeMsg.getUTCMinutes())).slice(-2).toString() + ':' + ("0" + dateTimeMsg.getUTCSeconds()).slice(-2).toString();
     
   }
 }
