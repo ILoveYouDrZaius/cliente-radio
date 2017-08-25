@@ -11,6 +11,7 @@ import { AudioplayerComponent } from '../../pages/radio/audioplayer/audioplayer.
 import { NavbarModule } from '../../shared_components/navbar/navbar.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FavouritesmodalComponent } from './favouritesmodal/favouritesmodal.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MessageComponent,
     ChatComponent,
     AudioplayerComponent,
+    FavouritesmodalComponent,
   ]
 })
 export class RadioModule { }
