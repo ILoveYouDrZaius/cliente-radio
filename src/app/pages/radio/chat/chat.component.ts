@@ -36,7 +36,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.auth.getCurrentAuthState().subscribe(data => {
       this._loginStatus = this.auth.isAuthenticated();
-      if (this._loginStatus) {1
+      if (this._loginStatus) {
         this.userKey = this.auth.getCurrentUserId();
       }
     });
@@ -59,8 +59,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   sendMessage(event) {
     event.preventDefault();
-    this.messagesService.sendMessage(this.stringToSend, this.userKey);
-    (<HTMLInputElement>document.getElementById("stringToSend")).value = '';
+    if (this.stringToSend !== '') {
+      this.messagesService.sendMessage(this.stringToSend, this.userKey);
+    }
+    (<HTMLInputElement>document.getElementById('stringToSend')).value = '';
+    this.stringToSend = '';
   }
 
   get stringToSend(): string {
