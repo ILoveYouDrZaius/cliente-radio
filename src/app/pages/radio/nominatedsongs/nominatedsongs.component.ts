@@ -21,13 +21,25 @@ export class NominatedsongsComponent implements OnInit {
   constructor(private songsService: SongsService,
               private emissionService: EmissionService,
               private auth: AuthService) {
+  }
 
+  voteSong(key: string) {
+    if (this._loginStatus) {
+      this.songsService.voteSong(key);
+      return this.songsService.getVotesSong(key);
+    }
+  }
+
+  ngOnInit() {
+    this.auth.getCurrentAuthState().subscribe(data => {
+      this._loginStatus = this.auth.isAuthenticated();
+    });
     const nominatedSongsKeys = [];
     this.emissionService.getNominatedEmissions().subscribe((snapshots) => {
       this.nominatedSongs = [];
       snapshots.forEach((snapshot) => {
         const tempSongNominated: NominatedSong = {votes: 0, title: '', artist: '', album: ''};
-        songsService.getSong(snapshot.$key).subscribe((song) => {
+        this.songsService.getSong(snapshot.$key).subscribe((song) => {
           let repeatedSong = false;
           tempSongNominated.$key = song.$key;
           tempSongNominated.title = song.title;
@@ -43,19 +55,6 @@ export class NominatedsongsComponent implements OnInit {
           }
         });
       });
-    });
-  }
-
-  voteSong(key) {
-    if (this._loginStatus) {
-      this.songsService.voteSong(key);
-      return this.songsService.getVotesSong(key);
-    }
-  }
-
-  ngOnInit() {
-    this.auth.getCurrentAuthState().subscribe(data => {
-      this._loginStatus = this.auth.isAuthenticated();
     });
   }
 

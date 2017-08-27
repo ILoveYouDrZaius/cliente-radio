@@ -22,16 +22,19 @@ export class SocialComponent implements OnInit {
   }
 
   loginWithFacebook() {
+    event.preventDefault();
     this.auth.loginWithFacebook();
     console.log('Login with Facebook');
   }
 
   loginWithGooglePlus() {
+    event.preventDefault();
     this.auth.loginWithGooglePlus();
     console.log('Login with Google+');
   }
 
   loginWithTwitter() {
+    event.preventDefault();
     this.auth.loginWithTwitter();
     console.log('Login with Twitter');
   }
