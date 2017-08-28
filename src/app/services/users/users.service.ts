@@ -32,15 +32,15 @@ export class UsersService {
     this.dbService.getObject(this.dbUrlService.getUsersPath(), keyUser).subscribe(snapshot => {
       try{ 
         if (!snapshot.favourites[keySong]) { 
-          this.dbService.update(this.dbUrlService.getUsersPath(), keyUser + '/favourites/' + keySong, { true: true });
+          this.dbService.set(this.dbUrlService.getUsersPath(), keyUser + '/favourites/' + keySong, true);
         }
       }
       catch (e){
         if(e instanceof TypeError){
-          this.dbService.update(this.dbUrlService.getUsersPath(), keyUser + '/favourites/' + keySong, { true: true });
+          this.dbService.set(this.dbUrlService.getUsersPath(), keyUser + '/favourites/' + keySong, true);
         }
       }
-    })
+    }).unsubscribe();
   }
 
   removeFavouriteSong(keyUser: string, keySong: string) {

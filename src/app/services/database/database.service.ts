@@ -82,6 +82,17 @@ export class DatabaseService {
   }
 
   /**
+   * Reemplaza los datos de un objeto en la base de datos
+   * @param path ruta al objeto que queremos actualizar
+   * @param key key del objeto que queremos actualizar
+   * @param data el objeto con los datos que queremos actualizar
+   * @returns {firebase.Promise<void>}
+   */
+  set(path: string, key: string, data: any): firebase.Promise<void> {
+    return this._angularFire.object(path + key).set(data);
+  }
+
+  /**
    * Borra un objeto de la base de datos
    * @param path ruta al nodo del que queremos borrar el objeto
    * @param key key del objeto que queremos borrar
