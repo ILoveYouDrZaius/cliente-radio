@@ -43,8 +43,8 @@ export class DatabaseService {
    * @returns {firebase.Promise<void>}
    */
   createWithKey(path: string, key: string, data: any): firebase.Promise<void> {
-    if (key) {
-      return this.update(path, key, data);
+    if(key) {
+      return this._angularFire.object(path + key).set(data);
     } else {
       console.log('Se debe especificar una key'); // TODO: controlar bien el error (promesa)
     }
@@ -79,17 +79,6 @@ export class DatabaseService {
    */
   update(path: string, key: string, data: any): firebase.Promise<void> {
     return this._angularFire.object(path + key).update(data);
-  }
-
-  /**
-   * Reemplaza los datos de un objeto en la base de datos
-   * @param path ruta al objeto que queremos actualizar
-   * @param key key del objeto que queremos actualizar
-   * @param data el objeto con los datos que queremos actualizar
-   * @returns {firebase.Promise<void>}
-   */
-  set(path: string, key: string, data: any): firebase.Promise<void> {
-    return this._angularFire.object(path + key).set(data);
   }
 
   /**
