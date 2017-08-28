@@ -14,3 +14,8 @@
 #mute {
     color: black;
 }
+
+a#genre {
+    color: black;
+    text-transform: capitalize;
+}

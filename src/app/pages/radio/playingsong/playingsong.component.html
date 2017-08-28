@@ -11,16 +11,18 @@
         <div class="media-body">
           <h5>{{ winnerSong?.artist }} - {{ winnerSong?.title }}</h5>
           <h5><small>{{ winnerSong?.album }}</small></h5>
-          <h5><small><a href="{{genreUrl}}"target="_blank">{{genreName}}</a></small></h5>
+          <h5><small><a href="{{genreUrl}}" id="genre" target="_blank">{{genreName}}</a></small></h5>
           
           <a href="#" *ngIf="muteAudio" id="mute" (click)="mute()"> <i class="fa fa-microphone fa-2x"></i></a>
           <a href="#" *ngIf="!muteAudio" id="mute" (click)="mute()"> <i class="fa fa-microphone-slash fa-2x"></i></a>
-          <a href="#" id="favourite"> <i class="fa fa-star-o fa-2x"></i></a>
+          <a href="#" id="favourite" *ngIf="_loginStatus"> <i class="fa fa-star-o fa-2x"></i></a>
         </div>
       </div>
     </div>
     <div class="col-2 mx-auto">
-      <app-favouritesmodal></app-favouritesmodal>
+      <app-favouritesmodal *ngIf="_loginStatus"></app-favouritesmodal>
+      <hr>
+      <app-profilemodal *ngIf="_loginStatus"></app-profilemodal>
     </div>
   </div>
 </div>

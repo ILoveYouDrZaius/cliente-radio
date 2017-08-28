@@ -3,6 +3,7 @@ import { SongsService } from '../../../services/songs/songs.service';
 import { EmissionService } from '../../../services/emission/emission.service';
 import { Song } from '../../../interfaces/song';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-playingsong',
@@ -18,13 +19,18 @@ export class PlayingsongComponent implements OnInit {
   private genreName: string;
   private genreUrl: string;
   private muteAudio: boolean;
+  private _loginStatus: boolean;
   closeResult: string;
 
   constructor(private songsService: SongsService,
-              private emissionService: EmissionService) {
+              private emissionService: EmissionService,
+              private auth: AuthService) {
   }
 
   ngOnInit() {
+    this.auth.getCurrentAuthState().subscribe(data => {
+      this._loginStatus = this.auth.isAuthenticated();
+    });
     this.emissionService.getActiveEmission().subscribe((snapshots) => {
       snapshots.forEach((snapshot) => {
         this.keySongPlaying = snapshot.$key;

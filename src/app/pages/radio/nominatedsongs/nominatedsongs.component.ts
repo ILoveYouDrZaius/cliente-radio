@@ -43,6 +43,7 @@ export class NominatedsongsComponent implements OnInit {
           let repeatedSong = false;
           tempSongNominated.$key = song.$key;
           tempSongNominated.title = song.title;
+          tempSongNominated.artist = song.artist;
           tempSongNominated.votes = snapshot.nominated_votes;
 
           this.nominatedSongs.forEach((_song) => {

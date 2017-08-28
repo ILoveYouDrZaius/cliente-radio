@@ -12,6 +12,7 @@ import { NavbarModule } from '../../shared_components/navbar/navbar.module';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FavouritesmodalComponent } from './favouritesmodal/favouritesmodal.component';
+import { ProfilemodalComponent } from './profilemodal/profilemodal.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { FavouritesmodalComponent } from './favouritesmodal/favouritesmodal.comp
     ChatComponent,
     AudioplayerComponent,
     FavouritesmodalComponent,
+    ProfilemodalComponent,
   ]
 })
 export class RadioModule { }
