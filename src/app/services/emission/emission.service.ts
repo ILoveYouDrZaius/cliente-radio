@@ -6,7 +6,8 @@ import { DatabaseUrlService } from '../database-url/database-url.service';
 export class EmissionService {
 
   constructor(private dbService: DatabaseService,
-    private dbUrlService: DatabaseUrlService) { }
+              private dbUrlService: DatabaseUrlService) { }
+  
   private activeSongKey: string;
 
   getActiveEmission() {
@@ -16,7 +17,7 @@ export class EmissionService {
     });
   }
 
-  getNominatedEmissions() {
+  getNominatedSongsEmission() {
     return this.dbService.getList(this.dbUrlService.getActiveEmissionPath(), {
       orderByChild: 'nominated',
       equalTo: true,

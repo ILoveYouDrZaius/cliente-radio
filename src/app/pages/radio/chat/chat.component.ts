@@ -53,10 +53,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.connectedUsers = this.usersService.getUsersConnectedList();
   }
 
-  removeMessageButton(messageKey: string) {
-    this.messagesService.removeMessage(messageKey);
-  }
-
   sendMessage(event) {
     event.preventDefault();
     if (this.stringToSend !== '') {

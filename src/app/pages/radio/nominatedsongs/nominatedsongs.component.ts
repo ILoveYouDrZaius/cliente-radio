@@ -35,7 +35,7 @@ export class NominatedsongsComponent implements OnInit {
       this._loginStatus = this.auth.isAuthenticated();
     });
     const nominatedSongsKeys = [];
-    this.emissionService.getNominatedEmissions().subscribe((snapshots) => {
+    this.emissionService.getNominatedSongsEmission().subscribe((snapshots) => {
       this.nominatedSongs = [];
       snapshots.forEach((snapshot) => {
         const tempSongNominated: NominatedSong = {votes: 0, title: '', artist: '', album: ''};

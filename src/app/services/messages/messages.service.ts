@@ -25,12 +25,6 @@ export class MessagesService {
     return this.dbService.getList(this.dbUrlService.getMessagesPath());
   }
 
-  removeMessage(key: string) {
-    this.dbService.remove(this.dbUrlService.getMessagesPath(), key).subscribe((data) => {
-      console.log(data);
-    });
-  }
-
   sendMessage(message: string, userKey: string) {
     const msg: Message = { message: '', timestamp: this.dbService.timestamp(), user: ''};
     msg.message = message;
