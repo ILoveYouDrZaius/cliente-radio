@@ -23,4 +23,29 @@ export class UsersService {
       equalTo: true,
     });
   }
+
+  songIsFavourite(keyUser: string, keySong: string) {
+    return this.dbService.getObject(this.dbUrlService.getUsersPath(), keyUser);
+  }
+
+  addFavouriteSong(keyUser: string, keySong: string) {
+    this.dbService.getObject(this.dbUrlService.getUsersPath(), keyUser).subscribe(snapshot => {
+      try{ 
+        if (!snapshot.favourites[keySong]) { 
+          this.dbService.update(this.dbUrlService.getUsersPath(), keyUser + '/favourites/' + keySong, { true: true });
+        }
+      }
+      catch (e){
+        if(e instanceof TypeError){
+          this.dbService.update(this.dbUrlService.getUsersPath(), keyUser + '/favourites/' + keySong, { true: true });
+        }
+      }
+    })
+  }
+
+  removeFavouriteSong(keyUser: string, keySong: string) {
+    this.dbService.remove(this.dbUrlService.getUsersPath(), keyUser + '/favourites/' + keySong).subscribe(result => {
+      console.log(result);
+    }).unsubscribe();
+  }
 }

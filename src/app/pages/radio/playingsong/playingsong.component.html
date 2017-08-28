@@ -15,7 +15,8 @@
           
           <a href="#" *ngIf="muteAudio" id="mute" (click)="mute()"> <i class="fa fa-microphone fa-2x"></i></a>
           <a href="#" *ngIf="!muteAudio" id="mute" (click)="mute()"> <i class="fa fa-microphone-slash fa-2x"></i></a>
-          <a href="#" id="favourite" *ngIf="_loginStatus"> <i class="fa fa-star-o fa-2x"></i></a>
+          <a href="#" id="favourite" *ngIf="_loginStatus && !favouriteSong" (click)="favouriteButton(winnerSong?.$key)"> <i class="fa fa-star-o fa-2x"></i></a>
+          <a href="#" id="favourite" *ngIf="_loginStatus && favouriteSong" (click)="favouriteButton(winnerSong?.$key)"> <i class="fa fa-star fa-2x"></i></a>
         </div>
       </div>
     </div>

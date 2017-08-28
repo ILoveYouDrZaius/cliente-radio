@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SongsService } from '../../../services/songs/songs.service';
 import { EmissionService } from '../../../services/emission/emission.service';
+import { UsersService } from '../../../services/users/users.service';
 import { Song } from '../../../interfaces/song';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AuthService } from '../../../services/auth/auth.service';
@@ -9,7 +10,7 @@ import { AuthService } from '../../../services/auth/auth.service';
   selector: 'app-playingsong',
   templateUrl: './playingsong.component.html',
   styleUrls: ['./playingsong.component.css'],
-  providers: [ SongsService ]
+  providers: [ SongsService, UsersService ]
 })
 export class PlayingsongComponent implements OnInit {
   private winnerSong: FirebaseObjectObservable<any>;
@@ -20,9 +21,12 @@ export class PlayingsongComponent implements OnInit {
   private genreUrl: string;
   private muteAudio: boolean;
   private _loginStatus: boolean;
+  private userKey: string;
+  private favouriteSong: boolean;
   closeResult: string;
 
   constructor(private songsService: SongsService,
+              private usersService: UsersService,
               private emissionService: EmissionService,
               private auth: AuthService) {
   }
@@ -30,6 +34,9 @@ export class PlayingsongComponent implements OnInit {
   ngOnInit() {
     this.auth.getCurrentAuthState().subscribe(data => {
       this._loginStatus = this.auth.isAuthenticated();
+      if (this._loginStatus) {
+        this.userKey = this.auth.getCurrentUserId();
+      }
     });
     this.emissionService.getActiveEmission().subscribe((snapshots) => {
       snapshots.forEach((snapshot) => {
@@ -45,6 +52,18 @@ export class PlayingsongComponent implements OnInit {
           this.genreUrl =  this.genreUrl.substr(0, 1).toUpperCase() + this.genreUrl.substr(1);
         });
         this.winnerSong = snapshot;
+        this.usersService.songIsFavourite(this.userKey, snapshot.$key).subscribe(snap => {
+          try {
+            if (snap.favourites[snapshot.$key]) {
+              this.favouriteSong = true;
+            } else {
+              this.favouriteSong = false;
+            }
+          }
+          catch (e) {
+            this.favouriteSong = false;
+          }
+        });
       });
     });
   }
@@ -53,6 +72,16 @@ export class PlayingsongComponent implements OnInit {
     const audio = document.getElementById('audioplayer');
     (<HTMLAudioElement>audio).muted = (!(<HTMLAudioElement>audio).muted);
     this.muteAudio = (<HTMLAudioElement>audio).muted;
+  }
+
+  favouriteButton(songKey) {
+    if (!this.favouriteSong){
+      this.usersService.addFavouriteSong(this.userKey, songKey);
+      this.favouriteSong = true;
+    }else{
+      this.usersService.removeFavouriteSong(this.userKey, songKey);
+      this.favouriteSong = false;      
+    }
   }
 
 }
