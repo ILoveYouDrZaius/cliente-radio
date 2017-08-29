@@ -6,14 +6,14 @@
             </button>
   </div>
   <div class="modal-body">
-    <p><i class="fa fa-minus-circle" id="delete" aria-hidden="true"></i>
- At the gates - Slaughter of the soul</p>
-    <p><i class="fa fa-minus-circle" id="delete" aria-hidden="true"></i>
- Avulsed - Daddy Stew</p>
+    <div *ngFor="let favSong of favouriteSongs">
+      <p><i class="fa fa-minus-circle" id="delete" aria-hidden="true" (click)="removeFavourite(favSong.$key)"></i> {{favSong.artist}} - {{favSong.title}}</p>
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cerrar</button>
   </div>
 </ng-template>
 
-<button class="btn btn-lg btn-primary" (click)="open(content)">Mis favoritas</button>
+<a class="btn btn-outline-info btn-sm" (click)="open(content)" href="#">
+  <i class="fa fa-heart"></i> Mis favoritas</a>

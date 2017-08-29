@@ -48,4 +48,8 @@ export class UsersService {
       console.log(result);
     }).unsubscribe();
   }
+
+  getFavouritesSongs(keyUser: string) {
+    return this.dbService.getList(this.dbUrlService.getUsersPath()+'/'+keyUser+'/favourites/');
+  }
 }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { UsersService } from '../../../services/users/users.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { Song } from '../../../interfaces/song';
+import { SongsService } from '../../../services/songs/songs.service';
 
 @Component({
   selector: 'app-favouritesmodal',
@@ -8,9 +12,49 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FavouritesmodalComponent implements OnInit {
   closeResult: string;
-  constructor(private modalService: NgbModal) { }
+  private userKey: string;
+  private _loginStatus: boolean;
+  private favouriteSongs: Song[] = [];
+
+  constructor(private songsService: SongsService,
+              private modalService: NgbModal,
+              private usersService: UsersService,
+              private auth: AuthService) { }
 
   ngOnInit() {
+    this.auth.getCurrentAuthState().subscribe(data => {
+      this._loginStatus = this.auth.isAuthenticated();
+      if (this._loginStatus) {
+        this.userKey = this.auth.getCurrentUserId();
+      }
+      this.usersService.getFavouritesSongs(this.userKey).subscribe((snapshots) => {
+        this.favouriteSongs = [];
+        snapshots.forEach((snapshot) => {
+          const tempSong: Song = { title: '', artist: '', album: '' };
+          this.songsService.getSong(snapshot.$key).subscribe((song) => {
+            let repeatedSong = false;
+            tempSong.$key = song.$key;
+            tempSong.title = song.title;
+            tempSong.artist = song.artist;
+            tempSong.album = song.album;
+
+            this.favouriteSongs.forEach((_song) => {
+              if (_song.title === tempSong.title) {
+                repeatedSong = true;
+              }
+            });
+            if (!repeatedSong) {
+              this.favouriteSongs.push(tempSong);
+            }
+          });
+        });
+        console.log(this.favouriteSongs);     
+      });
+    });
+  }
+
+  removeFavourite(songKey: string) {
+    this.usersService.removeFavouriteSong(this.userKey, songKey);
   }
 
   open(content) {
