@@ -34,13 +34,12 @@ export class UsersService {
 
   addFavouriteSong(keyUser: string, keySong: string) {
     this.dbService.getObject(this.dbUrlService.getUsersPath(), keyUser).subscribe(snapshot => {
-      try{ 
+      try {
         if (!snapshot.favourites[keySong]) { 
           this.dbService.createWithKey(this.dbUrlService.getUsersPath() + '/' + keyUser + '/favourites/', keySong, true);
         }
-      }
-      catch (e){
-        if(e instanceof TypeError){
+      } catch (e) {
+        if (e instanceof TypeError){
           this.dbService.createWithKey(this.dbUrlService.getUsersPath() + '/' + keyUser + '/favourites/', keySong, true);
         }
       }
