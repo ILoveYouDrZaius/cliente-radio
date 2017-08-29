@@ -59,8 +59,7 @@ export class PlayingsongComponent implements OnInit {
             } else {
               this.favouriteSong = false;
             }
-          }
-          catch (e) {
+          } catch (e) {
             this.favouriteSong = false;
           }
         });
@@ -80,7 +79,7 @@ export class PlayingsongComponent implements OnInit {
       this.favouriteSong = true;
     }else{
       this.usersService.removeFavouriteSong(this.userKey, songKey);
-      this.favouriteSong = false;      
+      this.favouriteSong = false;
     }
   }
 

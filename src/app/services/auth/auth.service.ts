@@ -59,7 +59,6 @@ export class AuthService {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(data => {
         console.log('Login correcto');
-        console.log(data); // TODO: sustituir por un sistema de log
       })
       .catch(err => {
         console.log(err); // TODO: sustituir por un sistema de log

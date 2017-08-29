@@ -14,6 +14,7 @@ export class ManualComponent implements OnInit {
   private _password: string;
   private _title: string;
   private _loginStatus: boolean;
+  private _loginFail: boolean;
 
   constructor(private auth: AuthService,
               private route: ActivatedRoute,
@@ -37,11 +38,15 @@ export class ManualComponent implements OnInit {
   }
 
   login() {
-    this.auth.loginWithEmail(this.email, this.password);
+    const log = this.auth.loginWithEmail(this.email, this.password);
+    console.log(log);
     this.auth.getCurrentAuthState().subscribe(data => {
       this._loginStatus = this.auth.isAuthenticated();
       if (this._loginStatus) {
         this.router.navigateByUrl('/');
+      } else {
+        console.log('Autenticación fallida');
+        this._loginFail = true;
       }
     });
   }

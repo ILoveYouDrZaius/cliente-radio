@@ -20,10 +20,10 @@
         </div>
       </div>
     </div>
-    <div class="col-2 mx-auto">
-      <app-favouritesmodal *ngIf="_loginStatus"></app-favouritesmodal>
+    <div class="col-2 mx-auto" *ngIf="_loginStatus">
+      <app-favouritesmodal></app-favouritesmodal>
       <hr>
-      <app-profilemodal *ngIf="_loginStatus"></app-profilemodal>
+      <app-profilemodal></app-profilemodal>
     </div>
   </div>
 </div>
