@@ -17,6 +17,10 @@ export class UsersService {
     });
   }
 
+  getUser(key: string) {
+    return this.dbService.getObject(this.dbUrlService.getUsersPath(), key);
+  }
+
   getUsersConnectedList() {
     return this.dbService.getList(this.dbUrlService.getUsersPath(), {
       orderByChild: 'connected',

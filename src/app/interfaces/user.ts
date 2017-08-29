@@ -3,7 +3,8 @@ export interface User {
     email?: string;
     username?: string;
     avatar?: string;
-    birth_date?: number;
+    gender?: string;
+    birth_date?: string;
     login_type?: string;
     name?: string;
     phone?: string;

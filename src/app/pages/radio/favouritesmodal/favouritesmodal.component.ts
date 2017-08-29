@@ -48,7 +48,6 @@ export class FavouritesmodalComponent implements OnInit {
             }
           });
         });
-        console.log(this.favouriteSongs);     
       });
     });
   }
