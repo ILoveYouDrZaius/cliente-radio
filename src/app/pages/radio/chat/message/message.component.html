@@ -1,8 +1,8 @@
 <div class="row">
-    <div class="col-lg-3">
+    <div [ngClass]="messageAdministrator" class="col-lg-3">
         {{username}} [{{msgDate}} {{msgTime}}]
     </div>
-    <div class="col-lg-9">
+    <div [ngClass]="messageAdministrator" class="col-lg-9">
         {{message.message}}
     </div>
 </div>

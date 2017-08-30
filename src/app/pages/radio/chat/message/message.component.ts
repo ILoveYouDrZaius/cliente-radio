@@ -13,12 +13,16 @@ export class MessageComponent implements OnInit {
   private username: string;
   private msgTime: String;
   private msgDate: String;
+  private messageAdministrator: String;
 
   constructor(private userService: UsersService) {}
 
   ngOnInit() {
     this.userService.getUserName(this.message.user).subscribe((data) => {
       this.username = data;
+      if (data == "Administración") {
+        this.messageAdministrator = "text-primary";
+      }
     });
     const dateTimeMsg = new Date(+(this.message.timestamp));
     this.msgDate = (("0" + dateTimeMsg.getUTCDate()).slice(-2).toString()) + '/' + (("0" + (dateTimeMsg.getUTCMonth() + 1)).slice(-2)).toString() + '/' + ("0" + dateTimeMsg.getUTCFullYear()).slice(-2).toString();
