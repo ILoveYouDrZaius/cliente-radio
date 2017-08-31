@@ -1,0 +1,43 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Mi perfil</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="row">
+        <div class="col">
+          <label for="usernameInput" class="col-form-label">Nombre de usuario</label>
+          <input id="usernameInput" type="text" class="form-control">
+        </div>
+        <div class="col">
+          <label for="phoneInput" class="col-form-label">Teléfono</label>
+          <input id="phoneInput" type="text" class="form-control" placeholder="Teléfono">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="genderInput" class="col-form-label">Sexo</label>
+          <select class="custom-select form-control" id="genderInput">
+            <option selected>Selecciona</option>
+            <option value="1">Hombre</option>
+            <option value="2">Mujer</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="datebirthInput" class="col-form-label">Fecha nacimiento</label>
+          <input class="form-control" type="date" value="2011-08-19" id="datebirthInput">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="save()">Guardar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cerrar</button>
+  </div>
+</ng-template>
+
+<a class="btn btn-outline-info btn-sm" (click)="open(content)" style="margin-top: 5px; margin-bottom: 5px;" href="#">
+  <i class="fa fa-cog"></i> Ajustes</a>
