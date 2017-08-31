@@ -43,8 +43,8 @@ export class DatabaseService {
    * @returns {firebase.Promise<void>}
    */
   createWithKey(path: string, key: string, data: any): firebase.Promise<void> {
-    if (key) {
-      return this.update(path, key, data);
+    if(key) {
+      return this._angularFire.object(path + key).set(data);
     } else {
       console.log('Se debe especificar una key'); // TODO: controlar bien el error (promesa)
     }
@@ -78,7 +78,7 @@ export class DatabaseService {
    * @returns {firebase.Promise<void>}
    */
   update(path: string, key: string, data: any): firebase.Promise<void> {
-    return this._angularFire.object(path + key).set(data);
+    return this._angularFire.object(path + key).update(data);
   }
 
   /**
@@ -95,5 +95,9 @@ export class DatabaseService {
         observer.error(error);
       });
     });
+  }
+
+  timestamp() {
+    return firebase.database.ServerValue.TIMESTAMP;
   }
 }

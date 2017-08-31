@@ -1,0 +1,13 @@
+<div class="webcomponent">
+  <h3>Chat</h3>
+  <div id="chatwindow" style="overflow-y:scroll; overflow-x: hidden; height:200px; text-align: justify; padding-top:25px;">
+    <div *ngFor="let message of messages | async">
+      <app-message [message]="message"></app-message>
+    </div>
+  </div>
+  <form autocomplete="off" (submit)="sendMessage($event)" class="chat">
+    <input type="text" *ngIf="_loginStatus" class="form-control" placeholder="Escribe tu mensaje" id="stringToSend" name="stringToSend" [(ngModel)]="stringToSend"/>
+    <input type="text" *ngIf="!_loginStatus" disabled class="form-control" placeholder="Regístrate para escribir" id="stringToSend" name="stringToSend" [(ngModel)]="stringToSend"/>
+    <button type="submit" style="display:none">hidden submit</button>
+  </form>
+</div>

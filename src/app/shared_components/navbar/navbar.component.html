@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+          <a href="/"> <h4 class="nav-item" style="color: white;"><i class="fa fa-play" aria-hidden="true"></i> Cliente Radio</h4></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-right">
+      <li class="nav-item" *ngIf="!_loginStatus">
+        <a class="nav-item nav-link" href="/login">Inicio de sesión / Registro</a>
+      </li>
+      <span class="navbar-text" *ngIf="_loginStatus">
+        <p class="nav-item">Hola, {{ username }}. ¿Quieres <a href="/" style="color:white;" (click)="logout()">Salir</a>?</p>
+      </span>
+    </ul>
+  </div>
+</nav>

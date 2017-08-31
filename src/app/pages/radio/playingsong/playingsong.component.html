@@ -1,0 +1,30 @@
+<div class="webcomponent">
+  <div class="row">
+    <div class="col">
+      <h3>Sonando ahora mismo...</h3>
+    </div>
+  </div>
+  <div class ="row">
+    <div class="col-6 mx-auto">
+      <div class="media">
+        <img class="card-img-top" src="{{ albumCoverUrl }}" style="width:120px;height:120px;">
+        <div class="media-body">
+          <h5>{{ winnerSong?.artist }} - {{ winnerSong?.title }}</h5>
+          <h5><small>{{ winnerSong?.album }}</small></h5>
+          <h5><small><a href="{{genreUrl}}" id="genre" target="_blank">{{genreName}}</a></small></h5>
+          
+          <a href="#" *ngIf="muteAudio" id="mute" (click)="mute()"> <i class="fa fa-microphone fa-2x"></i></a>
+          <a href="#" *ngIf="!muteAudio" id="mute" (click)="mute()"> <i class="fa fa-microphone-slash fa-2x"></i></a>
+          <a href="#" id="favourite" *ngIf="_loginStatus && !favouriteSong" (click)="favouriteButton(winnerSong?.$key)"> <i class="fa fa-star-o fa-2x"></i></a>
+          <a href="#" id="favourite" *ngIf="_loginStatus && favouriteSong" (click)="favouriteButton(winnerSong?.$key)"> <i class="fa fa-star fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 mx-auto" *ngIf="_loginStatus">
+      <div class="row justify-content-md-center">
+        <app-favouritesmodal></app-favouritesmodal>
+        <app-profilemodal></app-profilemodal>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,9 +1,8 @@
 export interface Song {
     $key?: string;
-    genre: string;
-    length: number;
-    path: string;
-    release_date: number;
+    genre?: string;
+    artist: string;
+    album: string;
     title: string;
-    votes: number;
+    votes?: number;
 }

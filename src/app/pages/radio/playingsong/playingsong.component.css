@@ -1,0 +1,21 @@
+.media-body {
+    margin-left: 10px;
+}
+
+.webcomponent {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#favourite {
+    color: #DFCA08;
+}
+
+#mute {
+    color: black;
+}
+
+a#genre {
+    color: black;
+    text-transform: capitalize;
+}
